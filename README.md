@@ -115,14 +115,25 @@ pytest --alluredir=reports/allure-results
 生成 Allure HTML 报告：
 
 ```bash
-npx allure-commandline generate reports/allure-results -o reports/allure-report --clean
+allure generate reports/allure-results -o reports/allure-report --clean
 ```
 
-打开 Allure 报告：
-
+打开报告：
 ```bash
-npx allure-commandline open reports/allure-report
+allure open reports/allure-report
 ```
+
+如果 WSL2 无法自动打开浏览器，可以进入：
+
+```
+cd reports/allure-report
+python3 -m http.server 8080
+```
+
+然后在 Windows 浏览器访问：
+
+```
+http://localhost:8080
 
 ---
 
@@ -150,15 +161,13 @@ logs/test_execution.log
     
 3. 使用显式等待提升自动化稳定性；
     
-4. 针对加入购物车流程，不仅校验成功提示，还结合购物车数量变化和购物车页面最终数据进行验证，提升了自动化用例稳定性。
-
-5. 测试失败时自动截图；
+4. 测试失败时自动截图；
     
-6. 使用 Allure 生成可视化测试报告；
+5. 使用 Allure 生成可视化测试报告；
     
-7. 包含测试计划、测试用例、缺陷记录等完整测试文档；
+6. 包含测试计划、测试用例、缺陷记录等完整测试文档；
     
-8. 适合作为软件测试求职作品集项目。
+7. 适合作为软件测试求职作品集项目。
     
 
 ---
