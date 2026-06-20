@@ -184,5 +184,45 @@ git remote set-url origin git@github.com:你的GitHub用户名/opencart-web-ui-t
 ssh -T git@github.com
 git push
 ```
+## 7.点击 Add to Cart 后等待 `.alert-success` 超时  
+  
+### 现象  
+  
+购物车用例失败，日志显示：  
+  
+```text  
+Click element: ('id', 'button-cart')  
+Wait visible: ('css selector', '.alert-success')  
+TimeoutException
+
+### 原因分析
+
+该问题说明 Selenium 已经成功点击了 Add to Cart 按钮，但脚本没有在指定时间内等到 `.alert-success` 成功提示。
+
+这不一定代表加入购物车失败，也可能是：
+
+1. 成功提示出现较慢；
+2. 成功提示 DOM 结构发生变化；
+3. 商品已经加入购物车，但提示没有及时出现；
+4. 页面通过 AJAX 更新购物车数量，但没有弹出明显提示；
+5. headless Chrome 下页面行为和普通浏览器略有差异。
+
+### 解决方案
+
+不要只依赖 `.alert-success` 作为唯一成功标准。
+
+更稳健的判断方式是：
+
+1. 点击 Add to Cart 前，先记录右上角购物车汇总信息；
+2. 点击 Add to Cart；
+3. 优先等待 `.alert-success`；
+4. 如果成功提示没有出现，再判断右上角购物车数量或金额是否变化；
+5. 最后进入购物车页面，校验商品名称和数量。
+
+### 总结
+
+Web UI 自动化中，弹窗提示属于辅助校验，最终业务结果才是更关键的校验点。
+
+对于加入购物车流程，最终校验应以购物车页面中的商品名称和数量为准。
 
 
