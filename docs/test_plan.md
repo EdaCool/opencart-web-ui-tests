@@ -118,4 +118,5 @@
 | Cloudflare 拦截 | 页面无法访问 | 不使用官方 demo.opencart.com |
 | Chrome 版本变化 | 浏览器启动失败 | 更新 Chrome 或 Selenium |
 | 测试数据变化 | 断言失败 | 使用稳定商品如 iPhone |
+| 加入购物车成功提示加载不稳定 | 用例误判失败 | 不只依赖 `.alert-success`，同时校验购物车数量变化和购物车页面最终商品数据 |
 
