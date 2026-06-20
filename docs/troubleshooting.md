@@ -194,7 +194,7 @@ git push
 Click element: ('id', 'button-cart')  
 Wait visible: ('css selector', '.alert-success')  
 TimeoutException
-
+```
 ### 原因分析
 
 该问题说明 Selenium 已经成功点击了 Add to Cart 按钮，但脚本没有在指定时间内等到 `.alert-success` 成功提示。
